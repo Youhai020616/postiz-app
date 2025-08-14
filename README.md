@@ -102,7 +102,39 @@
 
 ## Quick Start
 
-To have the project up and running, please follow the [Quick Start Guide](https://docs.postiz.com/quickstart)
+### 🚀 Railway + Vercel 部署 (推荐)
+```bash
+# 1. 克隆项目
+git clone https://github.com/your-username/postiz-app.git
+cd postiz-app
+
+# 2. 安装依赖
+pnpm install
+
+# 3. 部署到 Railway (后端 + Redis)
+pnpm run deploy:railway
+
+# 4. 部署到 Vercel (前端)
+pnpm run deploy:vercel
+```
+
+📖 详细部署指南: [doc/QUICK_START.md](./doc/QUICK_START.md)
+
+### 🛠️ 本地开发
+```bash
+# 1. 安装依赖
+pnpm install
+
+# 2. 配置环境变量
+cp .env.example .env
+# 编辑 .env 文件
+
+# 3. 生成 Prisma 客户端
+pnpm run prisma-generate
+
+# 4. 启动开发服务
+pnpm run dev
+```
 
 ## Sponsor Postiz
 

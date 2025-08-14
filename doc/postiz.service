@@ -1,0 +1,15 @@
+[Unit]
+Description=Postiz Social Media Scheduler
+After=network.target
+
+[Service]
+Type=simple
+User=postiz
+WorkingDirectory=/opt/postiz-app
+Environment=NODE_ENV=production
+ExecStart=/usr/bin/pnpm run pm2
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

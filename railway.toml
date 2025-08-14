@@ -1,3 +1,12 @@
 [phases.setup]
     nixPkgs = ['nodejs', 'python3']
     aptPkgs = ['build-essential', 'libudev-dev']
+
+[build]
+    builder = "nixpacks"
+    buildCommand = "pnpm install && pnpm run prisma-generate && pnpm run build:backend && pnpm run build:workers && pnpm run build:cron"
+
+[deploy]
+    startCommand = "pnpm run start:prod:backend"
+    restartPolicyType = "on_failure"
+    restartPolicyMaxRetries = 10
