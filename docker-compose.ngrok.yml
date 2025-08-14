@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  postiz:
+    image: ghcr.io/gitroomhq/postiz-app:latest
+    container_name: postiz-app
+    restart: always
+    environment:
+      # ngrok配置
+      MAIN_URL: "https://2bfee37715e9.ngrok-free.app"
+      FRONTEND_URL: "https://2bfee37715e9.ngrok-free.app"
+      NEXT_PUBLIC_BACKEND_URL: "https://2bfee37715e9.ngrok-free.app/api"
+      
+      # 安全配置
+      JWT_SECRET: "postiz-development-jwt-secret-for-ngrok-demo-very-long-random-string"
+      
+      # 数据库配置
+      DATABASE_URL: "postgresql://postiz-user:postiz-password@postiz-postgres:5432/postiz-db-local"
+      REDIS_URL: "redis://postiz-redis:6379"
+      BACKEND_INTERNAL_URL: "http://localhost:3000"
+      
+      # 开发配置
+      IS_GENERAL: "true"
+      DISABLE_REGISTRATION: "false"
+      NOT_SECURED: "false"  # 使用HTTPS
+      
+      # 文件存储配置
+      STORAGE_PROVIDER: "local"
+      UPLOAD_DIRECTORY: "/uploads"
+      NEXT_PUBLIC_UPLOAD_DIRECTORY: "/uploads"
+      
+      # API限制
+      API_LIMIT: "30"
+      
+    volumes:
+      - postiz-config:/config/
+      - postiz-uploads:/uploads/
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "5000:5000"
+    networks:
+      - postiz-network
+volumes:
+  postiz-config:
+  postiz-uploads:
+
+networks:
+  postiz-network:
